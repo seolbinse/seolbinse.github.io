@@ -281,7 +281,7 @@ tag_archive:
      tag: archive-taxonomy
    permalinks:
      category: /categories/:name/
-    tag: /tags/:name/
+     tag: /tags/:name/
 
 
 # HTML Compression
