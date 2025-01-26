@@ -22,7 +22,7 @@
 <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
 <!-- darkmode css -->
 {% if site.dark_theme_toggle == true %}
-<link rel="stylesheet" href="/assets/css/main_dark.css">
+<link rel="stylesheet" href="{{ '/assets/css/main_dark.css' | relative_url }}">
 {% endif %}
 
 {% if site.head_scripts %}
