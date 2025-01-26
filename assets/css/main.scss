@@ -5,9 +5,9 @@ search: false
 
 @charset "utf-8";
 
-@import "_sass/custom/customImport.scss";
+@import "C:\Users\9\Documents\GitHub\seolsebin.github.io\_sass\custom\customImport.scss";
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
 
-@import "_sass/custom/customOverride.scss";
+@import "C:\Users\9\Documents\GitHub\seolsebin.github.io\_sass\custom\customOverride.scss";
