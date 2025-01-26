@@ -11,7 +11,7 @@
 
 <script>
   document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
-  {% v if site.enable_copy_code_button -%}
+  {% if site.enable_copy_code_button -%}
     window.enable_copy_code_button = true;
   {%- endif %}
 </script>
