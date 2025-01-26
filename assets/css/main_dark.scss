@@ -5,9 +5,9 @@ search: false
 
 @charset "utf-8";
 
-@import "customImport.scss";
+@import "_sass\custom\customImport.scss";
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'dark' }}"; // skin
 @import "minimal-mistakes"; // main partials
 
-@import "customOverride.scss";
+@import "_sass\custom\customOverride.scss";
