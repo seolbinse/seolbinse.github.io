@@ -38,3 +38,7 @@ use_math: true
 ## Solve 1
 
 <img data-action="zoom" src='{{ "/assets/images/250320_1.png" | relative_url }}' alt='absolute'>
+
+뭔가 벌써 개판이다.....
+
+일단 문제를 차근차근 짚어보자.
