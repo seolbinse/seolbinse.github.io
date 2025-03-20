@@ -47,8 +47,7 @@ c, d, e, f.... 이니 출력은 f가 된다.
 
 ## Solve 1
 
-<pre>
-<code>
+~~~
 #include <string>
 #include <vector>
 
@@ -105,8 +104,7 @@ string solution(long long n, vector<string> bans)
     string answer = subAnswer;
     return answer;
 }
-</code>
-</pre>
+~~~
 
 뭔가 벌써 개판이다.....
 
