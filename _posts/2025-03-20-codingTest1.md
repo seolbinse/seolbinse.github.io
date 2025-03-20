@@ -44,7 +44,8 @@ use_math: true
 
 using namespace std;
 
-string solution(long long n, vector<string> bans) {
+string solution(long long n, vector<string> bans) 
+{
 
     string subAnswer;
 
