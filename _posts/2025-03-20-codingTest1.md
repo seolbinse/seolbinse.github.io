@@ -37,7 +37,8 @@ use_math: true
 
 ## Solve 1
 
-''''C++
+'''
+
 #include <string>
 #include <vector>
 
@@ -93,7 +94,8 @@ string solution(long long n, vector<string> bans) {
     string answer = subAnswer;
     return answer;
 }
-''''
+
+'''
 
 뭔가 벌써 개판이다.....
 
