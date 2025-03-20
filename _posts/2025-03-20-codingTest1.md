@@ -101,3 +101,5 @@ string solution(long long n, vector<string> bans)
 뭔가 벌써 개판이다.....
 
 일단 문제를 차근차근 짚어보자.
+
+수정 테스트
