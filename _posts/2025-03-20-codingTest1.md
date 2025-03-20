@@ -37,7 +37,8 @@ use_math: true
 
 ## Solve 1
 
-'''
+'''C++
+
 
 #include <string>
 #include <vector>
