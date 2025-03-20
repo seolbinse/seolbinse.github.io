@@ -47,7 +47,7 @@ c, d, e, f.... 이니 출력은 f가 된다.
 
 ## Solve 1
 
-~~~
+~~~C++
 #include <string>
 #include <vector>
 
