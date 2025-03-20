@@ -37,7 +37,63 @@ use_math: true
 
 ## Solve 1
 
-<img data-action="zoom" src='{{ "/assets/images/250320_1.png" | relative_url }}' alt='absolute'>
+''''C++
+#include <string>
+#include <vector>
+
+using namespace std;
+
+string solution(long long n, vector<string> bans) {
+
+    string subAnswer;
+
+    vector<short> numArray;
+    numArray.resize(n / 26 + 1);
+
+    int numCount = 1;
+    int  ascii = 96;
+
+    for (int num = 0; num < n; num++)
+    {
+        for (int i = 0, num1 = 0; i < 1; i++)
+        {
+            if (numArray[num1] >= 26)
+            {
+                numArray[num1] = 1;
+                i--;
+                num1++;
+                if (num1 + 1 > subAnswer.length())
+                {
+                    numCount++;
+                }
+                continue;
+            }
+
+            numArray[num1]++;
+        }
+        subAnswer.clear();
+
+        for (int i = numCount - 1; i > -1; i--)
+        {
+            string temp;
+
+            temp += char(ascii + numArray[i]);
+
+            subAnswer.append(temp);
+        }
+
+        for (int i = 0; i < bans.size(); i++)
+        {
+            if (subAnswer == bans[i])
+            {
+                num--;
+            }
+        }
+    }
+    string answer = subAnswer;
+    return answer;
+}
+''''
 
 뭔가 벌써 개판이다.....
 
