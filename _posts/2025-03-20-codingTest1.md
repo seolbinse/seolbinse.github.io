@@ -252,7 +252,8 @@ using namespace std;
 string solution(long long n, vector<string> bans) 
 {
     unordered_set<string> banHash(bans.begin(), bans.end());  
-    // bans string 배열을 unordered 해시테이블에 넣어 시간복잡도를 O(1)로 만듦
+    // bans string 배열을 unordered 해시테이블에 넣어 
+    // 시간복잡도를 O(1)로 만듦
     string answer = "a"; 
     // 첫 번째 문자부터 시작해서 문자열 만들기(26진수에서의 1)
 
