@@ -132,8 +132,6 @@ string solution(long long n, vector<string> bans)
 
 이러한 구조이다.
 
-
-
 우선 for 문이 너무 많다.......
 
 ```c++
