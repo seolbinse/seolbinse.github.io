@@ -45,7 +45,7 @@ c, d, e, f.... 이니 출력은 f가 된다.
 일단 내가 처음에 풀어본 풀이를 보자.
 
 
-## Solve 1
+## Solve_1
 
 ```c++
 #include <string>
@@ -114,7 +114,7 @@ string solution(long long n, vector<string> bans)
 
 일단 문제를 차근차근 짚어보자.
 
-# 문제
+## 분석_1
 
 일단 이 코드의 작동 방식은 이러하다.
 
