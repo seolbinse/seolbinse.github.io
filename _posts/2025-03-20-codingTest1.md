@@ -237,3 +237,78 @@ if (i < 0)
     answer = "a" + answer;
 }
 ```
+
+이렇게 되었다.
+
+완성본은 이러하다.
+
+```c++
+#include <string>
+#include <vector>
+#include <unordered_set>
+
+using namespace std;
+
+string solution(long long n, vector<string> bans) 
+{
+    unordered_set<string> banHash(bans.begin(), bans.end());  
+    // bans string 배열을 unordered 해시테이블에 넣어 시간복잡도를 O(1)로 만듦
+    string answer = "a"; 
+    // 첫 번째 문자부터 시작해서 문자열 만들기(26진수에서의 1)
+
+
+    while (n > 0) {
+        // 해시테이블을 통한 접근이므로 시간복잡도가 O(1)
+        if (banHash.find(answer) == banHash.end())
+        {
+            n--;
+            if (n == 0) break; // n이 감소하고 조건 체크
+        }
+
+        // 다음 문자열 생성 알고리즘
+        int i = answer.length() - 1;
+        // 현재 자릿수를 변수로 만듦
+        while (i >= 0) 
+        {
+            if (answer[i] < 'z')
+            { // 현재 자릿수의 알파벳이 z보다 작다면 다음 알파벳으로
+                answer[i]++;
+                break;
+            }
+            else 
+            { // z보다 크다면 현재 자릿수를 a로 만들고 다음 자릿수로 넘어감
+                answer[i] = 'a';
+                i--;
+            }
+        }
+
+        if (i < 0) 
+        { // i가 -1이라면 가장 높은 자릿수의 알파벳이 a로 바뀐 것이기에
+          // 다음 자릿수를 추가해줌
+            answer = "a" + answer;
+        }
+    }
+
+    return answer;
+}
+```
+
+확실히 간소화되었다.
+
+BigO로 봤을 때는 해시 테이블만 줄여도 똑같이 O(n * logn)이지만,
+
+이 표기법은 단순히 최악의 상황을 계산해주는 것이기에, 세부적으로는 불필요한 계산을 많이 줄였다.
+
+그렇다면 이게 정답일까?
+
+아니다.
+
+여기서 조금 당황하긴 했다.
+
+정답이 안 나와서가 아니라 원래 시간 복잡도부터 해결하고 공간 복잡도로 넘어가려 했으나,
+
+시간 복잡도를 손봤는데 공간 복잡도 문제가 생기지 않고,
+
+오히려 시간 복잡도를 더 손 봐야 했다.
+
+<img data-action="zoom" src='{{ "/assets/images/250320_3.png" | relative_url }}' alt='absolute'>
