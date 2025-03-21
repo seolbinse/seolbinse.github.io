@@ -188,9 +188,9 @@ O(m)의 경우, 배열 전체가 입력되고, 그 배열 내에서 원하는 �
 
 아 과정에서 해시 테이블은 STL에 내장되어 있는 unordered_set을 전처리하여 사용했다.
 
-```C++
-
-unordered_set<string> banHash(bans.begin(), bans.end());  // bans string 배열을 unordered 해시테이블에 넣어 시간복잡도를 O(1)로 만듦
+```c++
+unordered_set<string> banHash(bans.begin(), bans.end());
+// bans string 배열을 unordered 해시테이블에 넣어 시간복잡도를 O(1)로 만듦
 .
 .
 .
