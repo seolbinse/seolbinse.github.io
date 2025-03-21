@@ -76,7 +76,8 @@ string solution(long long n, vector<string> bans)
                 i--; // 반복문 반복을 위해 조건문의 숫자 i를 빼 줌
                 num1++; // 다음 자릿수 검사로 넘어감
                 if (num1 + 1 > answer.length()) 
-                { // 만약 문자열의 길이보다 현재 검사할 자릿수의 길이가 더 길다면,
+                { // 만약 문자열의 길이보다,
+                  // 현재 검사할 자릿수의 길이가 더 길다면,
                     numCount++; // 자릿수 변수에 1을 더함
                 }
                 continue; // 현재 자릿수가 26일 수도 있으니 컨티뉴로 넘어감
@@ -88,7 +89,8 @@ string solution(long long n, vector<string> bans)
         answer.clear(); // 이전에 입력한 값을 전부 지움
 
         for (int i = numCount - 1; i > -1; i--) // 자릿수만큼 반복
-        { // 문자열 입력의 순서가 앞자리부터이기에 반복문의 조건을 자릿수로 시작함
+        { // 문자열 입력의 순서가 앞자리부터이기에,
+          // 반복문의 조건을 자릿수로 시작함
             answer += char(ascii + numArray[i]);
             // 현재 자릿수에 해당하는 가상 26진수 배열의 원소에서 값을 가져와
             // 아스키코드를 대입해 문자열에 값을 추가함
@@ -99,12 +101,14 @@ string solution(long long n, vector<string> bans)
             if (answer == bans[i])
             {
                 num--;
-                // 제외할 문자열과 완성된 문자열이 일치하면 for문을 1번 더 반복
+                // 제외할 문자열과 완성된 문자열이 일치하면,
+                // for문을 1번 더 반복
             }
         }
     }
 
-    return answer; // 전체 for 문이 다 끝나고 나면 출력과 일치하는 문자열이 남는다
+    return answer;
+    // 전체 for 문이 다 끝나고 나면 출력과 일치하는 문자열이 남는다
 }
 ```
 
