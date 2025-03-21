@@ -55,57 +55,75 @@ using namespace std;
 
 string solution(long long n, vector<string> bans) 
 {
+    string answer; // 정답을 입력할 문자열
 
-    string subAnswer;
+    vector<short> numArray; // 가상 26진수로 사용할 배열
+    numArray.resize(n / 26 + 1); // 배열의 크기 정의
 
-    vector<short> numArray;
-    numArray.resize(n / 26 + 1);
+    int numCount = 1; // 알파벳 자릿수
+    int ascii = 96; // 매직넘버 지양용
 
-    int numCount = 1;
-    int  ascii = 96;
+    // 소문자 a는 97이나 가상 26진수의 비어있는 자리를 구분하기 위해 
+    // 0을 1로 사용했기에 기본적으로 1을 뺌
 
-    for (int num = 0; num < n; num++)
+    for (int num = 0; num < n; num++) // 입력된 정수만큼 반복문
     {
-        for (int i = 0, num1 = 0; i < 1; i++)
-        {
-            if (numArray[num1] >= 26)
+        for (int i = 0, num1 = 0; i < 1; i++) // 1번만 실행하는 for문
+        { // num1은 현재 
+            if (numArray[num1] >= 26) // 현재 자릿수가 26일 때,
             {
-                numArray[num1] = 1;
-                i--;
-                num1++;
-                if (num1 + 1 > subAnswer.length())
-                {
-                    numCount++;
+                numArray[num1] = 1; // 그 배열의 숫자를 1로 바꾸고,
+                i--; // 반복문 반복을 위해 조건문의 숫자 i를 빼 줌
+                num1++; // 다음 자릿수 검사로 넘어감
+                if (num1 + 1 > answer.length()) 
+                { // 만약 문자열의 길이보다 현재 검사할 자릿수의 길이가 더 길다면,
+                    numCount++; // 자릿수 변수에 1을 더함
                 }
-                continue;
+                continue; // 현재 자릿수가 26일 수도 있으니 컨티뉴로 넘어감
+                // (근데 반복문 조건은 이상이라 의미 없음)
             }
 
-            numArray[num1]++;
+            numArray[num1]++; // 1번만 반복할 시, 현재 자릿수에 1을 더하기
         }
-        subAnswer.clear();
+        answer.clear(); // 이전에 입력한 값을 전부 지움
 
-        for (int i = numCount - 1; i > -1; i--)
-        {
-            string temp;
-
-            temp += char(ascii + numArray[i]);
-
-            subAnswer.append(temp);
+        for (int i = numCount - 1; i > -1; i--) // 자릿수만큼 반복
+        { // 문자열 입력의 순서가 앞자리부터이기에 반복문의 조건을 자릿수로 시작함
+            answer += char(ascii + numArray[i]);
+            // 현재 자릿수에 해당하는 가상 26진수 배열의 원소에서 값을 가져와
+            // 아스키코드를 대입해 문자열에 값을 추가함
         }
 
-        for (int i = 0; i < bans.size(); i++)
-        {
-            if (subAnswer == bans[i])
+        for (int i = 0; i < bans.size(); i++) 
+        { // 제외 문자열 검사
+            if (answer == bans[i])
             {
                 num--;
+                // 제외할 문자열과 완성된 문자열이 일치하면 for문을 1번 더 반복
             }
         }
     }
-    string answer = subAnswer;
-    return answer;
+
+    return answer; // 전체 for 문이 다 끝나고 나면 출력과 일치하는 문자열이 남는다
 }
 ```
 
 뭔가 벌써 개판이다.....
 
+변수 이름은 정답 맞추고 고쳐야지 했는데 결국 못 고쳤다.
+
 일단 문제를 차근차근 짚어보자.
+
+# 문제
+
+일단 이 코드의 작동 방식은 이러하다.
+
+- 정수 배열을 가상 26진수로 생각하고, 배열의 0번째 인덱스가 26이라면 0으로 만들고 다음 인덱스에 1을 더한다.
+
+- 이렇게 1을 더한 다음 인덱스도 26이라면 그 인덱스를 0으로 만들고 다음 인덱스를 검사한다.
+
+- 다음 26진수를 구했다면 이를 아스키코드에 대입해 문자열을 생성한다.
+
+- 해당 문자열이 제외할 문자열 배열의 원소와 겹치는 게 있다면, 전체 for 문에서 1을 빼 검사를 한번 더 수행한다.
+
+- 이하 반복, 반복문이 끝난다면 제외할 문자열들을 제외했을 때 n번째 오는 문자열이 남는다.
