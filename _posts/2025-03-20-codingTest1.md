@@ -217,7 +217,8 @@ while (n > 0)
 // 다음 문자열 생성 알고리즘
 int i = answer.length() - 1;
 // 현재 자릿수를 변수로 만듦
-while (i >= 0) {
+while (i >= 0) 
+{
     if (answer[i] < 'z')
     { // 현재 자릿수의 알파벳이 z보다 작다면 다음 알파벳으로
         answer[i]++;
