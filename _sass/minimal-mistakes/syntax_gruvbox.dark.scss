@@ -1,8 +1,9 @@
-.highlight table td { padding: 3px; font-size: $type-size-4; }
+.highlight table td { padding: 3px; }
 .highlight table pre { margin: 0; }
 .highlight, .highlight .w {
   color: #fbf1c7;
   background-color: #282828;
+  font-size: $type-size-4;
 }
 .highlight .err {
   color: #fb4934;
