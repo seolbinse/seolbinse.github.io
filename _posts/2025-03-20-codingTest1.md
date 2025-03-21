@@ -196,10 +196,43 @@ unordered_set<string> banHash(bans.begin(), bans.end());
 
 while (n > 0)
     // 해시테이블을 통한 접근이므로 시간복잡도가 O(1)
-    if (banHash.find(subAnswer) == banHash.end()) 
+    if (banHash.find(answer) == banHash.end()) 
         n--;
 ```
 
 
 이렇게 원하는 자료를 찾는 과정을 O(n)에서 O(1)로 줄였다.
 
+## 불필요한 연산 제거
+
+해시 테이블을 쓰고 머리를 조금 굴려 봤는데
+
+굳이 26진수를 만들고 이걸 대입하는 게 아니라,
+
+그냥 문자열을 순차적으로 증가시키는 형태로 만드는 게 낫지 않나 하는 생각이 들었고,
+
+바로 그렇게 만들어 보았다.
+
+```c++
+// 다음 문자열 생성 알고리즘
+int i = answer.length() - 1;
+// 현재 자릿수를 변수로 만듦
+while (i >= 0) {
+    if (answer[i] < 'z')
+    { // 현재 자릿수의 알파벳이 z보다 작다면 다음 알파벳으로
+        answer[i]++;
+        break;
+    }
+    else 
+    { // z보다 크다면 현재 자릿수를 a로 만들고 다음 자릿수로 넘어감
+        answer[i] = 'a';
+        i--;
+    }
+}
+
+if (i < 0) 
+{ // i가 -1이라면 가장 높은 자릿수의 알파벳이 a로 바뀐 것이기에
+  // 다음 자릿수를 추가해줌
+    answer = "a" + answer;
+}
+```
