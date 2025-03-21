@@ -137,19 +137,23 @@ string solution(long long n, vector<string> bans)
 우선 for 문이 너무 많다.......
 
 ```c++
-for (int num = 0; num < n; num++) // 입력값에 따라서 일정하게 늘어나는 선형 구조
+for (int num = 0; num < n; num++) 
+// 입력값에 따라서 일정하게 늘어나는 선형 구조
 { // O(n)
-    for (int i = 0, num1 = 0; i < 1; i++) // 특정 상황에서만 연산량이 늘어났다가 줄어드는 구조
+    for (int i = 0, num1 = 0; i < 1; i++) 
+    // 특정 상황에서만 연산량이 늘어났다가 줄어드는 구조
     { // 대부분의 연산이 O(1)
 
     }
 
-    for (int i = numCount - 1; i > -1; i--) // 계속 늘어나지만 특정 조건에서만 연산량이 증가하는 로그 구조
+    for (int i = numCount - 1; i > -1; i--) 
+    // 계속 늘어나지만 특정 조건에서만 연산량이 증가하는 로그 구조
     { // O(logn)
 
     }
 
-    for (int i = 0; i < bans.size(); i++) // 입력값에 따라서 일정하게 늘어나는 선형 구조 
+    for (int i = 0; i < bans.size(); i++) 
+    // 입력값에 따라서 일정하게 늘어나는 선형 구조 
     { // O(m) 맨 위와 표기가 겹치기에 일시적으로 m이라 표현
 
     }
