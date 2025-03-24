@@ -326,7 +326,7 @@ BigO로 봤을 때는 해시 테이블만 줄여도 똑같이 O(n * logn)이지�
 
 ## 정답
 
-```C++
+```c++
 #include <string>
 #include <vector>
 #include <algorithm>
