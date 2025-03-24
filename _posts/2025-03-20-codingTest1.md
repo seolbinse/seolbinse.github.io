@@ -325,3 +325,144 @@ BigO로 봤을 때는 해시 테이블만 줄여도 똑같이 O(n * logn)이지�
 한참을 멀리 돌아가고 잘못 왔다는 걸 깨달은 뒤, 다시 풀어보도록 하자.
 
 ## 정답
+
+```C++
+#include <string>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+const int MAX = 12; // 계산 한계 설정(최적화)
+long long power26[MAX] = { 1 }; // 26의 거듭제곱을 저장, 첫 자리는 1
+
+long long strtonum(const string& spell) 
+{
+    // 기본 값 0
+    long long value = 0;
+
+    // 주문 문자열의 알파벳만큼 반복
+    for (char character : spell) {
+        // value(현재 값)에 26을 곱해서 각 자릿수를
+        // 다음 자릿수로 미룸
+        // character - 'a'를 더해 1의 자리를 채움
+        value = value * 26 + (character - 'a');
+    }
+
+    // 완성된 문자열->숫자 변환을 리턴
+    return value;
+}
+
+string numtostr(long long number, int length) 
+{
+    // length는 문자열의 자릿수
+    string spell_string(length, 'a');
+    // 자릿수의 역순으로 문자열을 조합하여 순서 맞추기
+    for (int i = length - 1; i >= 0; i--) 
+    {
+        // 현재 자릿수에 나누기의 나머지를 입력해서 알파벳 입력
+        spell_string[i] = static_cast<char>('a' + (number % 26));
+        // 26으로 나눠서 다음 자릿수 검사
+        number /= 26;
+    }
+
+    // 완성된 문자열 출력
+    return spell_string;
+}
+
+string solution(long long n, const vector<string> bans) 
+{
+    // 26의 거듭제곱을 배열에 넣음, 그 배열의 맨 첫번째는 1
+    for (int i = 1; i < MAX; i++) 
+    {
+        power26[i] = power26[i - 1] * 26;
+    }
+
+    vector<vector<long long>> banNum(MAX);
+    for (const string& spell : bans) 
+    {
+        // 금지 문자열의 크기(문자가 몇 개인지)
+        // 문자의 개수별로 구분해 배열에 저장
+        // banNum 1번 배열에는 1자릿수 금지 문자열만 담기 등...
+        int len = spell.size();
+        // 그 개수의 위치에서부터 숫자로 변환한 문자열을
+        // 배열의 뒤에 밀어넣음
+        banNum[len].emplace_back(strtonum(spell));
+    }
+
+    for (int i = 1; i < MAX; i++) 
+    {
+        // 각 저장 배열 내의 금지 문자열을 정렬
+        sort(banNum[i].begin(), banNum[i].end());
+    }
+
+    for (int len = 1; len < MAX; len++) 
+    {
+        // 현재 자릿수 범위의 26진수 숫자(26의 거듭제곱)
+        long long total = power26[len];
+        // 현재 자릿수의 금지 문자열 크기
+        long long blocked = banNum[len].size();
+        // 자릿수 범위에서 금지 문자열 빼서
+        // 현재 자릿수에서 가능한 숫자 개수 계산
+        long long available = total - blocked;
+
+        // 출력할 순서 숫자가 현재 자릿수에서 가능한 숫자들보다 크다면
+        // n에서 가능한 숫자 조합을 빼고 다음 자리로 넘김
+        if (n > available) 
+        {
+            n -= available;
+            continue;
+        }
+
+        // 여기로 넘어왔다면 가능한 범위에 문자 조합이 있다는 뜻
+        
+        // 현재 자릿수 기준으로 n번째 숫자가 찾으려는 문자열
+        long long remaining = n;
+        // prev는 이전에 봤던 번호, selected는 선택한 번호
+        long long prev = -1, selected = -1;
+
+        // 현재 자릿수의 금지 숫자열 순회
+        for (long long banNumber : banNum[len]) 
+        {
+            // 현재 금지 숫자와 현재 검사하고 있는 숫자의 차이
+            long long gap = banNumber - (prev + 1);
+            // 남아있는 검사할 숫자가 차이보다 작다면
+            if (remaining <= gap) 
+            {
+                // 현재 선택된 문자열에 이전에 검사할 문자열과
+                // 남아있는 문자열의 숫자를 더함
+                selected = prev + remaining;
+                break;
+            }
+
+            // 남은 숫자에 차이를 빼서 다음 숫자 검사
+            remaining -= gap;
+            // 이전에 검사한 번호를 현재 검사한 금지 숫자로
+            prev = banNumber;
+        }
+
+        // 현재 자릿수에 금지할 숫자열이 없다면 수행
+        if (selected == -1) 
+        {
+            selected = prev + remaining;
+        }
+
+        // 출력된 결과를 문자열로 바꿔서 리턴
+        return numtostr(selected, len);
+    }
+}
+```
+
+문제의 결과는 이러하다.
+
+찾을 순서의 숫자 내에 금지 문자열이 존재하는가 판단하고, 순서를 수정한 뒤
+
+그 순서를 문자열로 변환하는 알고리즘이다.
+
+순서가 많아지면 연산량이 비례해서 늘어나던 방식과 달리,
+
+연산량이 많은 함수들의 시간복잡도가 log n이다.
+
+즉, 연산량이 기하급수적으로 늘어나더라도 연산하는 속도는 크게 달라지지 않는다.
+
+이상으로 코테 오답노트를 마친다.
